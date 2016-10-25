@@ -1,0 +1,33 @@
+<html>
+<body style="padding-top: 30px;">
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href = "feedback.css" rel = "stylesheet" type = "text/css" media = "screen">
+  <title>Обратная связь</title>
+  </head>
+  <body>
+<div class="content__section">
+  <p><i ></i> <span ><b style="font-size: 20px;">Отправить мне письмо:<b></span></p>
+  <form class="form">
+      <div class="form__inner">
+      <div class="form__group form__column"><input type="text" class="form__element field" name="username" placeholder="Введите имя" pattern="^\S[а-яА-ЯёЁa-zA-Z\s]+\S" required="">
+        <i class="icon"></i> <span class="form__decor-line"></span></div>
+        <div class="form__group form__column"><input type="email" class="form__element field" name="usermail" placeholder="Введите email" required="">
+        <i class="icon"></i> <span class="form__decor-line"></span></div>
+      </div>
+      <div class="form__group">
+        <select class="form__element select" name="subject">
+        <option class="select__option">Тема</option>
+        <option class="select__option">Работа</option>
+        <option class="select__option">Учёба</option>
+        <option class="select__option">Другое</option>
+       </select>
+      <i class="icon"></i>
+    </div>
+    <div class="form__group">
+      <textarea class="form__element field textarea" name="msg" placeholder="Введите сообщение" required=""></textarea>
+      <i class="icon"></i> <span class="form__decor-line"></span></div>
+      <div class="form__button-box"><button class="button">Отправить</button></div></form>
+
+  </body>
+</htnl>

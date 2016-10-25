@@ -1,0 +1,63 @@
+
+/*---------Gallery----------*/
+.gallery {
+    background-color: transparent;
+    box-shadow: none;
+    width: 600px;
+    display: block;
+    clear: both;
+    float: none;
+    padding-top: 50px;
+    padding-left: 40px;
+    height: auto;
+
+}
+.gallery a {
+    display: inline-block;
+    height: 135px;
+    position: relative;
+    width: 180px;
+    /* CSS3 Prevent selections */
+    user-select: none;
+}
+.gallery a img {
+    border: 8px solid #fff;
+    border-bottom: 20px solid #fff;
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 1;
+    /* CSS3 Box sizing property */
+    box-sizing: border-box;
+    /* CSS3 transition rules */
+    transition: all 1.0s ease;
+    /* CSS3 Box Shadow */
+    box-shadow: 2px 2px 4px #444;
+}
+
+.gallery a:focus img {
+  transition: all 1.0s ease;
+  z-index: 25;
+  position: absolute;
+}
+
+.gallery a:focus img.landscape {
+    /*cursor: default;*/
+    height: 200%;
+    left: -40px;
+    top: -40px;
+    width: 200%;
+    /*transform: rotate(0deg);*/
+}
+.gallery a:focus img.portrait {
+    /*cursor: default;*/
+    height: 200%;
+    left: -40px;
+    top: -40px;
+    width: 125%;
+    /*transform: rotate(0deg);*/
+}
