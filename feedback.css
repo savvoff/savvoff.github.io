@@ -35,8 +35,8 @@
     font-family: 'Open Sans',sans-serif;
     font-size: 1rem;
     color: #000;
-	
-	
+
+
 }
 .field:focus {
     outline: none
@@ -109,18 +109,17 @@
     background-color: #da8b37;
     cursor: pointer;
     transition: background-color .4s ease-out;
-	border-radius: 17px; 
-	
+	border-radius: 17px;
+
 }
 .button:hover,.button:focus {
     background-color: #da9b37
 }
 
-
-p {text-indent: 25px;
+p {
+  text-indent: 25px;
 	font-size: 14px;
 	font-weight: 0;
 	font-family: 'Open Sans';
 	color: #da9b37;
 }
-
