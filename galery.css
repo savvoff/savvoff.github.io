@@ -7,7 +7,7 @@
     display: block;
     clear: both;
     float: none;
-    padding-top: 50px;
+    padding-top: 40px;
     padding-left: 40px;
     height: auto;
 
@@ -49,7 +49,7 @@
     /*cursor: default;*/
     height: 200%;
     left: -40px;
-    top: -40px;
+    top: -50px;
     width: 200%;
     /*transform: rotate(0deg);*/
 }
@@ -57,7 +57,7 @@
     /*cursor: default;*/
     height: 200%;
     left: -40px;
-    top: -40px;
+    top: -50px;
     width: 125%;
     /*transform: rotate(0deg);*/
 }
