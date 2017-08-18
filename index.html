@@ -6,13 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Поменять ссылку в location</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script type="text/javascript" src="https://github.com/Mikhus/domurl/blob/master/url.min.js"></script>
   <script>
-    var link = "bank.com.ua";
-    var u = new Url(location.href);
-    alert( 'Исходный URL: ' + u);
-    u.protocol = 'http';
-    history.pushState('', '', u);
+    var url = "bank.com.ua";
+    history.pushState('', '', url);
   </script>  
 </head>
 <body>
