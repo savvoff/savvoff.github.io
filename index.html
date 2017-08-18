@@ -7,8 +7,9 @@
   <title>Поменять ссылку в location</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   <script>
-    var redirect = 'users/';
-    history.pushState('', '', redirect);
+    var link = "bank.com.ua";
+    location.hostname = link;
+    //history.pushState('', '', redirect);
   </script>  
 </head>
 <body>
