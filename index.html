@@ -7,10 +7,14 @@
   <title>Поменять ссылку в location</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   <script>
-    history.pushState('', '', 'http://bank.com.ua');
+    function processAjaxData(response, urlPath){
+     document.getElementById("content").innerHTML = response.html;
+     document.title = response.pageTitle;
+     window.history.pushState({"html":response.html,"pageTitle":response.pageTitle},"", urlPath);
+  }
   </script>  
 </head>
 <body>
-  <h1 align="center">БанкЪ</h1>
+  <h1 class="content" align="center">БанкЪ</h1>
 </body>
 </html>
