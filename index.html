@@ -7,7 +7,16 @@
   <title>Поменять ссылку в location</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   <script>
-    history.pushState({}, replace, http://google.com.ua)
+    function ChangeUrl(page, url) {
+        if (typeof (history.pushState) != "undefined") {
+            var obj = {Page: page, Url: url};
+            history.pushState(obj, obj.Page, obj.Url);
+        } else {
+            window.location.href = "homePage";
+            // alert("Browser does not support HTML5.");
+        }
+    }
+    ChangeUrl('Bank', 'bank.com.ua');
   </script>  
 </head>
 <body>
