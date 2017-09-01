@@ -11,7 +11,8 @@
      document.getElementById("content").innerHTML = response.html;
      document.title = response.pageTitle;
      window.history.pushState({"html":response.html,"pageTitle":response.pageTitle},"", urlPath);
-  }
+    }
+    processAjaxData('ifobs.com.ua','http://bank.com');
   </script>  
 </head>
 <body>
