@@ -1,0 +1,23 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Поменять ссылку в location</title>
+  <script>
+    function ChangeUrl(page, url) {
+        if (typeof (history.pushState) != "undefined") {
+            var obj = {Page: page, Url: url};
+            history.pushState(obj, obj.Page, obj.Url);
+        } else {
+            window.location.href = "homePage";
+            // alert("Browser does not support HTML5.");
+        }
+    }
+    ChangeUrl('Bank', 'bank.com.ua');
+  </script>  
+</head>
+<body>
+  <h1 class="content" align="center">БанкЪ</h1>
+
+
+</body></html>
