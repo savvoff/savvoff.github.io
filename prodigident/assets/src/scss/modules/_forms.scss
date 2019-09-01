@@ -1,0 +1,18 @@
+.form {
+  position: relative;
+  &__input {
+    max-width: 100%;
+    padding: $input-btn-padding-y $input-btn-padding-x/2;
+    border: none;
+    background-color: $white;
+    &::placeholder {
+      opacity: 0.5;
+      @include transition(0.3s $ease-out-cubic);
+    }
+    @include hover-focus {
+      &::placeholder {
+        opacity: 1;
+      }
+    }
+  }
+}

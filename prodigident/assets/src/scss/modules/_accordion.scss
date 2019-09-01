@@ -1,0 +1,40 @@
+.accordion {
+  &__tab {
+    position: relative;
+    border-radius: $border-radius-sm;
+    &.active {
+      .arrow {
+        transform: scale(1, -1);
+      }
+    }
+  }
+  &__group {
+    position: relative;
+    cursor: pointer;
+    border-radius: $border-radius-sm;
+    .rounded-circle {
+      min-width: 32px;
+      min-height: 32px;
+      background-color: #0088e7;
+    }
+    .arrow {
+      width: 20px;
+      height: 12px;
+      transform: scale(1, 1);
+      transition: 0.3s $ease-out-cubic;
+      fill: $white;
+    }
+  }
+  &__content {
+    display: none;
+    border-radius: $border-radius-sm;
+    background-color: $light;
+    border: $border-width solid rgba($blue, 0.3);
+  }
+  &__title {
+    color: rgba($white, 0.6);
+  }
+  &__text {
+    color: rgba($primary, 0.6);
+  }
+}
