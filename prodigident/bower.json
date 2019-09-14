@@ -10,6 +10,7 @@
     "smoothscroll-for-websites": "^1.4.9",
     "aos": "^2.3.4",
     "flickity": "^2.2.1",
-    "particles.js": "^2.0.0"
+    "particles.js": "^2.0.0",
+    "flickity-fullscreen": "^1.1.1"
   }
 }

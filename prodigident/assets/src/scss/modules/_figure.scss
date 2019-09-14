@@ -1,8 +1,13 @@
 .thumb {
   position: relative;
+  min-height: 170px;
   @include hover-focus {
     .thumb__img {
       transform: translate(0, 0) scale(1.05);
+    }
+    .thumb__caption {
+      top: -5%;
+      right: 0;
     }
   }
   &__img {
@@ -19,5 +24,6 @@
     height: 120px;
     top: -15%;
     right: -5%;
+    @include transition(0.3s $ease-out-cubic);
   }
 }

@@ -26,12 +26,12 @@
 // @import "mixins/alert";
 @import "../../../../node_modules/bootstrap/scss/mixins/buttons";
 // @import "mixins/caret";
-// @import "mixins/pagination";
+@import "../../../../node_modules/bootstrap/scss/mixins/pagination";
 @import "../../../../node_modules/bootstrap/scss/mixins/lists";
 // @import "mixins/list-group";
 // @import "mixins/nav-divider";
 // @import "mixins/forms";
-// @import "mixins/table-row";
+@import "../../../../node_modules/bootstrap/scss/mixins/table-row";
 
 // // Skins
 @import "../../../../node_modules/bootstrap/scss/mixins/background-variant";
@@ -54,13 +54,10 @@
   @include object-fit(cover, top);
 */
 @mixin object-fit($fit: fill, $position: null) {
-  -o-object-fit: $fit;
-     object-fit: $fit;
+  object-fit: $fit;
   @if $position {
     font-family: "object-fit: #{$fit}; object-position: #{$position}";
-
-    -o-object-position: $position;
-       object-position: $position;
+    object-position: $position;
   } @else {
     font-family: "object-fit: #{$fit}";
   }

@@ -67,8 +67,8 @@ fieldset:disabled a.btn {
   background-color: $white;
   @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
   .arrow {
-    max-width: 30px;
-    max-height: 25px;
+    max-width: 25px;
+    max-height: 20px;
     float: right;
     fill: $secondary;
   }
@@ -89,6 +89,7 @@ fieldset:disabled a.btn {
   height: 45px;
   box-shadow: none;
   transform: translateY(150%);
+  z-index: $zindex-sticky;
   @include media-breakpoint-up(lg) {
     width: 65px;
     height: 65px;

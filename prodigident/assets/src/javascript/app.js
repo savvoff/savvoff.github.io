@@ -17,7 +17,7 @@
       aos: {
         // Global settings:
         // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-        disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+        disable: 'mobile', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
         offset: 100, // offset (in px) from the original trigger point
         duration: 600, // values from 0 to 3000, with step 50ms
         easing: 'ease-out-quart', // default easing for AOS animations
@@ -66,6 +66,7 @@
         },
         sliderGuideText: {
           // wrapAround: true,
+          fade: true,
           asNavFor: '.slider-guide',
           draggable: false,
           pageDots: false,
@@ -75,6 +76,8 @@
         },
         sliderPrezi: {
           // wrapAround: true,
+          fullscreen: true,
+          lazyLoad: 1,
           asNavFor: '.slider-prezi',
           pageDots: false,
           percentPosition: false,
@@ -162,7 +165,7 @@
     // Particles init
     const $particles = $('.particles');
     $particles.each((i, el)=> {
-      particlesJS.load(el.id, '/assets/dist/javascript/particles.json');
+      particlesJS.load(el.id, `${window.location.origin}/particles.json`);
     });
 
     // Wrapper top
@@ -174,6 +177,7 @@
     $('.burger').click(() => {
       $body.css('overflow') === 'hidden' ? unBlockGlobalScroll() : blockGlobalScroll();
       $header.toggleClass('is-open');
+      $('.page-aside').toggleClass('is-show');
     })
     function moveBorderSlide() {
       if (isMobile()) return;
@@ -193,6 +197,17 @@
     }
     $('.page-header__menu li').on('mouseover', moveBorderSlide);
     $('.page-header__menu li').on('mouseout', moveBorderSlideToActive);
+
+    // Footer menu
+    const $footerMenu =  $('.page-footer ul');
+    function closeFooterMenu() {
+      isMobile() ? $footerMenu.slideUp() : $footerMenu.slideDown();
+    }
+    closeFooterMenu();
+
+    $('.footer-toggler').click(() => {
+      $('.page-footer ul').slideToggle();
+    });
 
     // Modal
     $('.open-modal').on('click', () => $('.modal').toggleClass('is-open'));
@@ -235,10 +250,8 @@
       moveBorderSlideToActive();
       setTimeout(() => {
         $loader.addClass('is-load');
-        setTimeout(() => {
-          // AOS.init(settings.aos)
+          AOS.init(settings.aos)
           unBlockGlobalScroll();
-        }, 1100);
       }, 300);
       // SVG FF & IE gradient fix
       $('#svg-sprites svg').each(function (i, el) {
@@ -251,6 +264,7 @@
   // Scripts that will run on window resize
     $(window).on('resize', () => {
       wrapperOffset();
+      closeFooterMenu();
     });
 
   // Scripts that will run on window scroll
@@ -262,6 +276,6 @@
       currentScroll = $nextScrollPos;  //Updates current scroll position
 
       // btn to top
-      $nextScrollPos >= $(this).height()/2 ? $toTopBtn.addClass('is-show') : $toTopBtn.removeClass('is-show');
+      $nextScrollPos >= $(ev.currentTarget).height()/2 ? $toTopBtn.addClass('is-show') : $toTopBtn.removeClass('is-show');
     });
 })();
