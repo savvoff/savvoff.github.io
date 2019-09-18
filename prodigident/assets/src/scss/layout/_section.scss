@@ -101,6 +101,7 @@
     }
   }
   &.top-hero {
+    overflow: initial;
     img {
       width: 70%;
       &:nth-child(3) {

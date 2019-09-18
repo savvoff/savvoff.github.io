@@ -22,8 +22,8 @@
     flex-direction: column;
     justify-content: flex-end;
     height: 120px;
-    top: -15%;
-    right: -5%;
+    top: -12%;
+    right: -2%;
     @include transition(0.3s $ease-out-cubic);
   }
 }

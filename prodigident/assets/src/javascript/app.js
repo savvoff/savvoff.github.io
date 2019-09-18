@@ -111,6 +111,14 @@
     // load sprite on page
     $('#svg-sprites').load(PATH + 'assets/dist/images/svg/sprite.symbol.svg', r => r.data);
 
+    // Zoom auto set
+    function setZoomClass() {
+      if (window.devicePixelRatio === 1.25 || window.devicePixelRatio === 1.5) {
+        document.documentElement.classList.add('zoom125');
+        settings.aos.disable = true;
+      }
+    }
+
     // Obj fit
     objectFitImages($('.img-fit'));
 
@@ -247,6 +255,7 @@
     $(window).on('load', () => {
       setFullHeight();
       wrapperOffset();
+      setZoomClass();
       moveBorderSlideToActive();
       setTimeout(() => {
         $loader.addClass('is-load');
