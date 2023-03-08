@@ -28,8 +28,30 @@ export class Grid extends EventEmitter {
     });
 
     this.showItems();
-    this.initEvents();
+    this.initEvents();    
   }
+  
+  animateWeightsOnMove() {
+    const fw = 0.6 // 600
+    gsap.set(this.titleChars, { '--font-weight-multiplier': fw });
+    window.addEventListener('mousemove', ev => {
+      // Track the mouse position
+      this.titleChars.forEach((el) => {
+        // calculate the distance between the cursor and the element
+        const { top, left, width, height } = el.getBoundingClientRect();
+        const elementX = left + width / 2;
+        const elementY = top + height / 2;
+        const distance = Math.sqrt(Math.pow(elementX - ev.clientX, 2) + Math.pow(elementY - ev.clientY, 2));
+        // calculate the new value based on the distance and limit it to between 0 and 1
+        const multiplier = 1 - Math.min(Math.max(distance / (window.innerHeight / 2), 0), 1);
+        if (!this.DOM.el.classList.contains('grid--inactive') && multiplier >= fw) {
+          // update the css var of the element using GSAP to animate the change
+          gsap.to(el, { '--font-weight-multiplier': multiplier, ease: 'Power1.easeOut' });
+        }
+      })
+    });
+  }
+
   // Initial animation to scale up and fade in the items
   showItems() {
     gsap
@@ -46,9 +68,11 @@ export class Grid extends EventEmitter {
         duration: 1.2,
         ease: 'power1',
         opacity: 1,
-        stagger: { amount: 0.4, grid: 'auto', from: 'center' }
+        stagger: { amount: 0.4, grid: 'auto', from: 'center' },
+        onComplete: () => this.animateWeightsOnMove()
       }, 'start');
   }
+
   initEvents() {
     for (const item of this.gridItems) {
       item.DOM.image.addEventListener('mouseenter', () => {
@@ -71,6 +95,7 @@ export class Grid extends EventEmitter {
       });
     }
   }
+
   showContent(item) {
     if (this.isContentOpen) {
       return false;
@@ -145,6 +170,7 @@ export class Grid extends EventEmitter {
         opacity: 1
       }, 'start+=1.5');
   }
+
   hideContent(item) {
     if (!this.isContentOpen) {
       return false;

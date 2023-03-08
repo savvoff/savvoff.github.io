@@ -18,12 +18,12 @@ export default defineNuxtConfig({
           charset: 'utf-8'
         }
       ],
-      link: [
-        { 
-          rel: 'stylesheet', 
-          href: 'https://use.typekit.net/gyf5muf.css' // tenon font-family
-        }
-      ],
+      // link: [
+      //   { 
+      //     rel: 'stylesheet', 
+      //     href: 'https://use.typekit.net/gyf5muf.css' // tenon font-family
+      //   }
+      // ],
       style: [],
       script: [
         {

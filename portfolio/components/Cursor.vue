@@ -12,6 +12,6 @@
   const cursor = ref(null)
 
   onMounted(() => {
-    window.cursor = $cursor(cursor.value)
-  });
+    window.cursor = $cursor(cursor.value)    
+  })
 </script>

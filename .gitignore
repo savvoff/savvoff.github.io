@@ -9,7 +9,7 @@
 
 # production
 # dist
-#dist
+dist
 
 # ftp + archives
 .ftpconfig

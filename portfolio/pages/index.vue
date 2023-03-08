@@ -1,16 +1,13 @@
 <template>
   <div class="content">
-    <h1 class="content__title">
-      <span class="content__title-line content__title-line--1" data-splitting>{{ fullnameArr[0] }}</span>
-      <span class="content__title-line content__title-line--2" data-splitting>{{ fullnameArr[1] }}</span>
-    </h1>
+    <bg-title />
     <div class="grid" ref="grid">
       <a v-for="project, idx in projects" 
       :key="idx" 
       :class="`grid__item pos-${idx+1}`" 
       :href="`#preview-${idx+1}`" 
       :data-title="project.title">
-        <div class="grid__item-img" :style="`background-image:url(${project.image});`"></div>
+        <div class="grid__item-img" :style="`background: ${projectsColors[idx]}`"></div>
       </a>
     </div>
     <div class="preview">
@@ -24,17 +21,20 @@
         </div>
         <h2 data-splitting class="preview__item-title">{{ project.title }}</h2>
         <div class="preview__item-content">
-          <div class="preview__item-meta"><span>Project Client</span><span>15/05/2022</span></div>
+          <div class="preview__item-meta">
+            <span>{{ project.category }}</span>
+            <span>{{ project.date }}</span>
+          </div>
           <p class="preview__item-description">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore sequi temporibus aliquid quas minima assumenda et, quis perspiciatis incidunt est repellat, tempora magni commodi sit illo amet iure culpa!
+           {{ project.desc }}
           </p>      
           <div class="preview__item-info">
-            <p>Used technologies:</p>
-            <span>Nuxt 3</span>
-            <span>Strapi</span>
-            <span>SCSS</span>
+            <p class="preview__item-meta">Used technologies:</p>
+            <span v-for="lib, id in project.stack" :key="id">
+              {{ lib }}
+            </span>
           </div>    
-          <a class="preview__item-button" href="" target="_blank">See site</a>
+          <a class="preview__item-button" :href="project.link" target="_blank">See site</a>
         </div>
       </div>
     </div>
@@ -43,17 +43,35 @@
 
 <script setup>  
   import imagesLoaded from 'imagesloaded'
+  import BgTitle from '~/components/BgTitle.vue'
 
   const { $grid, $event } = useNuxtApp()
   const { public: { projects } } = useRuntimeConfig()
-  const author = ref('Ihor Savvov');
   const grid = ref(null);  
-  const fullnameArr = computed(() => {
-    return author.value.split(' ')
-  })
+
+  const colors = [
+   '#684ee3',
+   '#c0ec59',
+   '#0053d4',
+   '#2187f1',
+   '#54c4db',
+   '#9a4fd8',
+   '#f4c466'
+  ]
+
+  const projectsColors = computed(() => {
+    let colorsArr = [], i = 0
+    if (projects.length > colors.length) {
+      do {
+        colorsArr.push(...colors)
+        i++
+      } while (i < Math.ceil(projects.length/colors.length))
+    }
+    return colorsArr
+  }) 
 
   onMounted(() => {
-    imagesLoaded('.grid .grid__item-img', { background: true }, () => {      
+    imagesLoaded('.preview .preview__item-img', { background: true }, () => {
       $event('imgs:loaded');
       // Initialize grid
       const item = $grid(grid.value)
@@ -61,9 +79,10 @@
       // change cursor text status when hovering a grid item
       item.on('mouseEnterItem', itemTitle => window.cursor.DOM.text.innerHTML = itemTitle)
       item.on('mouseLeaveItem', _ => window.cursor.DOM.text.innerHTML = '')
+      window.cursor.renderedStyles['scaleTrail'].current = 1;
     });
   })
-  const exposed = { projects, author }
+  const exposed = { projects }
   defineExpose(exposed)
 </script>
 

@@ -24,28 +24,31 @@ export class Cursor {
       tyTrail: { previous: 0, current: 0, amt: 0.03 },
       txText: { previous: 0, current: 0, amt: 0.1 },
       tyText: { previous: 0, current: 0, amt: 0.1 },
-      scale: { previous: 1, current: 1, amt: 0.15 }
+      scale: { previous: 1, current: 1, amt: 0.15 },
+      scaleTrail: { previous: 0, current: 0, amt: 0.01 }
     };
 
     this.makeTrail();
 
-    this.onMouseMoveEv = () => {
-      this.renderedStyles.tx.previous = this.renderedStyles.tx.current
-        = this.renderedStyles.txTrail.current = this.renderedStyles.txText.previous
-        = this.renderedStyles.txText.current
-        = mouse.x - this.bounds.width / 2;
-      this.renderedStyles.ty.previous = this.renderedStyles.ty.current
-        = this.renderedStyles.tyTrail.current = this.renderedStyles.tyText.previous
-        = this.renderedStyles.tyText.current
-        = mouse.y - this.bounds.height / 2;
-
-      gsap.to(this.DOM.el, { duration: 0.9, ease: 'Power3.easeOut', opacity: 1 });
-      requestAnimationFrame(() => this.render());
-      window.removeEventListener('mousemove', this.onMouseMoveEv);
-    };
+    this.onMouseMoveEv = this.updateRender.bind(this);
 
     this.addEventListeners();
   }
+
+  updateRender() {
+    this.renderedStyles.tx.previous = this.renderedStyles.tx.current
+      = this.renderedStyles.txTrail.current = this.renderedStyles.txText.previous
+      = this.renderedStyles.txText.current
+      = mouse.x - this.bounds.width / 2;
+    this.renderedStyles.ty.previous = this.renderedStyles.ty.current
+      = this.renderedStyles.tyTrail.current = this.renderedStyles.tyText.previous
+      = this.renderedStyles.tyText.current
+      = mouse.y - this.bounds.height / 2;
+
+    gsap.to(this.DOM.el, { duration: 0.9, ease: 'Power3.easeOut', opacity: 1 });
+    requestAnimationFrame(() => this.render());
+    window.removeEventListener('mousemove', this.onMouseMoveEv);
+  };
 
   makeTrail() {
     const trail = document.createElement('div');
@@ -75,7 +78,7 @@ export class Cursor {
     }
 
     this.DOM.svg.style.transform = `translateX(${(this.renderedStyles['tx'].previous)}px) translateY(${this.renderedStyles['ty'].previous}px)`;
-    this.DOM.trail.style.transform = `translateX(${(this.renderedStyles['txTrail'].previous)}px) translateY(${this.renderedStyles['tyTrail'].previous}px)`;
+    this.DOM.trail.style.transform = `translateX(${(this.renderedStyles['txTrail'].previous)}px) translateY(${this.renderedStyles['tyTrail'].previous}px) scale(${this.renderedStyles['scaleTrail'].previous})`;
     this.DOM.text.style.transform = `translateX(${(this.renderedStyles['txText'].previous)}px) translateY(${this.renderedStyles['tyText'].previous}px)`;
     this.DOM.circle.style.transform = `scale(${this.renderedStyles['scale'].previous})`;
     requestAnimationFrame(() => this.render());

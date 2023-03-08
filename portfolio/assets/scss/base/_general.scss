@@ -1,7 +1,12 @@
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
+  box-sizing: border-box;  
+}
+
+::selection {
+  color: var( --color-text);
+  background: var(--color-link);
 }
 
 html,
@@ -17,7 +22,8 @@ body {
   margin: 0;
   color: var(--color-text);
   background-color: var(--color-bg);
-  font-family: tenon, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  font-family: 'FixelGT', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  font-variation-settings: "wght" 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -26,6 +32,7 @@ a {
   text-decoration: underline;
   color: var(--color-link);
   outline: none;
+  transition: 0.3s;
   &:hover, &:focus {
     text-decoration: none;
     color: var(--color-link-hover);
@@ -52,6 +59,7 @@ a:focus {
   border: 0;
   padding: 0;
   margin: 0;
+  color: var(--color-text);
   font: inherit;
   cursor: pointer;
   &:focus {
@@ -80,15 +88,16 @@ a:focus {
       width: 60px;
       height: 60px;
       margin: -30px 0 0 -30px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent transparent var(--color-link);
       border-radius: 50%;
-      opacity: 0.4;
-      background: var(--color-link);
-      animation: loaderAnim 0.7s linear infinite alternate forwards;
+      opacity: 0.5;
+      animation: loaderAnim 0.35s linear infinite;
     }    
     @keyframes loaderAnim {
       to {
-        opacity: 1;
-        transform: scale3d(0.5, 0.5, 1);
+        transform: rotate(360deg) translatez(0);
       }
     }
   }
@@ -145,6 +154,9 @@ a:focus {
       position: relative;
       overflow: hidden;
       line-height: 1;
+      .char {
+        font-variation-settings: "wght" calc(1000 * var(--font-weight-multiplier, 0.6));
+      }
       &--1 {
         margin-left: -5vw;
       }
@@ -168,7 +180,7 @@ a:focus {
   &__item {
     position: relative;
     will-change: transform;
-    grid-area: var(--grid-row) / var(--grid-column) / span 12 / span 5;
+    grid-area: var(--grid-row) / var(--grid-column) / span 14 / span 5;
     &-img {
       position: relative;
       width: 100%;
@@ -196,8 +208,8 @@ a:focus {
   }
 
   .pos-4 {
-    --grid-row: 15;
-    --grid-column: 12;
+    --grid-row: 14;
+    --grid-column: 10;
   }
 
   .pos-5 {
@@ -207,7 +219,7 @@ a:focus {
 
   .pos-6 {
     --grid-row: 20;
-    --grid-column: 43;
+    --grid-column: 44;
   }
 
   .pos-7 {
@@ -216,12 +228,12 @@ a:focus {
   }
 
   .pos-8 {
-    --grid-row: 40;
+    --grid-row: 35;
     --grid-column: 14;
   }
 
   .pos-9 {
-    --grid-row: 37;
+    --grid-row: 35;
     --grid-column: 29;
   }
 
@@ -232,7 +244,7 @@ a:focus {
 
   .pos-11 {
     --grid-row: 1;
-    --grid-column: 44;
+    --grid-column: 41;
   }
 
   .pos-12 {
@@ -305,7 +317,8 @@ a:focus {
 
     &-title {
       grid-area: preview-title;
-      font-family: dystopian, sans-serif;
+      font-family: inherit;
+      font-variation-settings: "wght" 600;
       font-size: 12vw;
       font-size: clamp(1.5rem, 12vw, 20vh);
       margin: 0;
@@ -337,7 +350,7 @@ a:focus {
       grid-area: preview-content;
       max-width: calc(1100px - min(80vmin, 500px));
       min-height: 440px;
-      line-height: 1.3;
+      line-height: normal;
     }
     
     &-meta {
@@ -353,24 +366,27 @@ a:focus {
     &-info {
       display: block;
       margin: 1rem 0;
+      p {
+        padding: 0;
+      }
       span {
         display: inline-block;
         padding: 0.3rem 1rem;
         margin: 0 0.3rem 0.3rem 0;
-        color: #fff;
+        color: var(--color-text);
         background-color: var(--color-link);
       }
     }
     
     &-button {
-      color: #fff;
+      color: var(--color-text);
       border: 0;
       border-radius: 2rem;
       text-transform: uppercase;
       font: inherit;
       font-size: 0.875rem;
       font-weight: 500;
-      background: #000;
+      background: var(--color-title);
       padding: 1rem 2rem;
       display: inline-block;
       cursor: pointer;
@@ -509,19 +525,21 @@ a:focus {
     left: 0;
     pointer-events: none;
     z-index: 9999;
+    opacity: 0;
     &-trail {
       position: absolute;
       top: 0;
       left: 0;
-      width: 60vmin;
-      height: 60vmin;
+      width: 80vmin;
+      height: 80vmin;
       margin: {
-        top: calc(-30vmin + 40px);
-        left: calc(-30vmin + 40px);
+        top: calc(-40vmin + 40px);
+        left: calc(-40vmin + 40px);
       };
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(227, 21, 77, 0.6) 0%, rgba(227, 21, 77, 0) 80%);
+      background: radial-gradient(circle, rgba($indigo, 0.6) 0%, rgba($indigo, 0) 80%);
       filter: blur(50px);
+      transform: scale(0);
     }
     &__svg {
       pointer-events: none;
@@ -542,7 +560,9 @@ a:focus {
       font-size: 0.857rem;
       text-transform: uppercase;
       font-weight: 500;
-      fill: var(--cursor-text);
+      font-feature-settings: "salt", "ss01";
+      fill: var(--cursor-fill);
+      color: var(--cursor-text);
     }
   }  
 }
