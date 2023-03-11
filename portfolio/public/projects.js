@@ -40,7 +40,7 @@ export const projects = [
     starred: true
   },
   {
-    title: 'Savva Libkin',
+    title: 'Libkin',
     category: 'Personal site + eCommerce',
     desc: 'The Savva Libkin Restaurants Company, are a fine-tuning company born in Odessa. Develop concept restaurants, own food production and multi-channel models of its sale.',
     image: 'https://loremflickr.com/1360/1880/cat/all',
@@ -70,23 +70,23 @@ export const projects = [
     starred: true
   },
   {
-    title: 'Gloryboost',
-    category: 'Corporate site',
-    desc: 'Working from 2008 on market of World of Warcraft. Remake for Epiccarry.com that you can be sure in 100%.',
+    title: 'Originale',
+    category: 'Personal site',
+    desc: 'Satirical concomitant to the understanding of art in the European Capital of Culture.',
     image: 'https://loremflickr.com/1360/1880/cat/all',
-    date: '01/09/2021',
-    link: 'https://gloryboost.nextpage.agency/',
-    stack: ['WooCommerce', 'Gulp 4', 'Bootstrap 4', 'Multisite'],
+    date: '01/08/2021',
+    link: 'https://www.deroriginale.at/',
+    stack: ['Jekyll', 'PWA', 'SCSS', 'Forestry.io'],
     starred: null
   },
   {
-    title: 'Cardesigner configurator',
+    title: 'Cardesigner',
     category: 'Car configurator page',
     desc: 'Make the world a little more colorful... and easier... for everyone! The result of the basic idea of ​​CarDesigners.',
     image: 'https://loremflickr.com/1360/1880/cat/all',
     date: '02/02/2021',
     link: 'https://www.car-designer.de/konfigurator/',
-    stack: ['SVG-editor', 'Rest API', 'SCSS', 'jQuery'],
+    stack: ['SVG-editor', 'AJAX', 'SCSS', 'jQuery'],
     starred: null
   },
   {
@@ -100,7 +100,7 @@ export const projects = [
     starred: null
   },
   {
-    title: 'USA Trucking business',
+    title: 'USATrucking',
     category: 'Forum + News portal',
     desc: 'The company provides services on mutually beneficial terms to both drivers and transport companies.',
     image: 'https://loremflickr.com/1360/1880/cat/all',
