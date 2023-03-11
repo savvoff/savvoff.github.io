@@ -61,7 +61,13 @@ export class Cursor {
     this.renderedStyles['scale'].current = 1.75;
   }
 
-  enter() {
+  enter(ev) {
+    if (ev.currentTarget.classList.contains('grid__item')) {
+      const color = ev.currentTarget.dataset.color;
+      const colorArr = gsap.utils.splitColor(color); 
+      this.DOM.trail.style.setProperty('--gradient-1', `rgba(${colorArr.join(',')},0.6)`);
+      this.DOM.trail.style.setProperty('--gradient-2', `rgba(${colorArr.join(',')},0)`);
+    }
     this.renderedStyles['scale'].current = 1.5;
   }
 
@@ -89,8 +95,8 @@ export class Cursor {
     document.addEventListener('mousedown', () => this.active());
     document.addEventListener('mouseup', () => this.leave());
     [...document.querySelectorAll('a, button, .grid__item')].forEach(link => {
-      link.addEventListener('mouseenter', () => this.enter());
-      link.addEventListener('mouseleave', () => this.leave());
+      link.addEventListener('mouseenter', (ev) => this.enter(ev));
+      link.addEventListener('mouseleave', (ev) => this.leave(ev));
     });
   }
 }

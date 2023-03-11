@@ -6,8 +6,9 @@
       :key="idx" 
       :class="`grid__item pos-${idx+1}`" 
       :href="`#preview-${idx+1}`" 
-      :data-title="project.title">
-        <div class="grid__item-img" :style="`background: ${projectsColors[idx]}`"></div>
+      :data-title="project.title"
+      :data-color="projectsColors[idx]">
+        <div class="grid__item-img" :style="`background-color: ${projectsColors[idx]};background-image:url(${project.image});`"></div>
       </a>
     </div>
     <div class="preview">
@@ -17,7 +18,7 @@
       class="preview__item">
         <button class="preview__item-back unbutton"><span>Back</span></button>
         <div class="preview__item-imgwrap">
-          <div class="preview__item-img" :style="`background-image:url(${project.image});`"></div>
+          <div class="preview__item-img" :style="`background-color: ${projectsColors[idx]};`"></div>
         </div>
         <h2 data-splitting class="preview__item-title">{{ project.title }}</h2>
         <div class="preview__item-content">
@@ -71,8 +72,8 @@
   }) 
 
   onMounted(() => {
-    imagesLoaded('.preview .preview__item-img', { background: true }, () => {
-      $event('imgs:loaded');
+    imagesLoaded('.grid .grid__item-img', { background: true }, () => {
+      $event('imgs:loaded');      
       // Initialize grid
       const item = $grid(grid.value)
   

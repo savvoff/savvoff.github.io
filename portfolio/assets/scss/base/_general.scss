@@ -54,6 +54,15 @@ a:focus {
   display: none;
 }
 
+.message {
+	position: relative;
+	z-index: 100;
+	background: var(--color-text);
+	color: var(--color-bg);
+	padding: 0.5rem;
+	font-size: 0.75rem;
+}
+
 .unbutton {
   background: none;
   border: 0;
@@ -116,23 +125,6 @@ a:focus {
   user-select: none;
 }
 
-.frame {
-  padding: 1rem 5vw;
-  position: relative;
-  z-index: 1000;
-  &__title {
-    font-size: 1rem;
-    margin: 0 0 1rem;
-    font-weight: normal;
-  }
-  &__links {
-    display: inline;
-    a:not(:last-child) {
-      margin-right: 1rem;
-    }
-  }
-}
-
 .content {
   display: flex;
   flex-direction: column;
@@ -185,7 +177,8 @@ a:focus {
       position: relative;
       width: 100%;
       height: 100%;
-      background-size: cover;
+      background-size: contain;
+      background-repeat: no-repeat;
       background-position: 50% 50%;
       border-radius: 10px;
       will-change: transform;
@@ -426,54 +419,6 @@ a:focus {
     display: none;
   }
 
-  .frame {
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    display: grid;
-    align-content: space-between;
-    width: 100%;
-    max-width: none;
-    height: 100%;
-    padding: 1rem 1.5rem;
-    grid-gap: 6vw;
-    pointer-events: none;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto auto;
-    grid-template-areas: 'title links ...'
-      '... ... ...'
-      '... ... ...';
-    
-    &__title-wrap {
-      grid-area: title;
-      display: flex;
-    }
-  
-    &__title {
-      margin: 0;
-      &-wrap {
-        grid-area: title;
-        display: flex;
-      }
-    }
-  
-    &__tagline {
-      position: relative;
-      margin: 0 0 0 1rem;
-      padding: 0 0 0 1rem;
-      opacity: 0.5;
-    }  
-    &__links {
-      grid-area: links;
-      padding: 0;
-    }
-
-    a {
-      pointer-events: auto;
-    }
-  } 
-
   .content {
     height: 100%;
   }
@@ -527,7 +472,9 @@ a:focus {
     z-index: 9999;
     opacity: 0;
     &-trail {
-      position: absolute;
+      --gradient-1: #{rgba($indigo, 0.6)};
+      --gradient-2: #{rgba($indigo, 0)};
+      position: absolute; 
       top: 0;
       left: 0;
       width: 80vmin;
@@ -537,7 +484,7 @@ a:focus {
         left: calc(-40vmin + 40px);
       };
       border-radius: 50%;
-      background: radial-gradient(circle, rgba($indigo, 0.6) 0%, rgba($indigo, 0) 80%);
+      background: radial-gradient(circle, var(--gradient-1) 0%, var(--gradient-2) 80%);
       filter: blur(50px);
       transform: scale(0);
     }
