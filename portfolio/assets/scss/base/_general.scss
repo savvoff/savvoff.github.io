@@ -367,7 +367,7 @@ a:focus {
         padding: 0.3rem 1rem;
         margin: 0 0.3rem 0.3rem 0;
         color: var(--color-text);
-        background-color: var(--color-link);
+        background-color: var(--span-color, --color-link);
       }
     }
     
@@ -386,7 +386,7 @@ a:focus {
       margin-bottom: 1rem;
       &:hover, &:focus, &:active {
         outline: none;
-        background: var(--color-link);
+        background: var(--span-color, --color-link);
       }
     }
 

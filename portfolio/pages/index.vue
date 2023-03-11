@@ -16,6 +16,7 @@
       <div v-for="project, idx in projects" 
       :key="idx" 
       :id="`preview-${idx+1}`"
+      :style="{'--span-color': projectsColors[idx]}"
       class="preview__item">
         <button class="preview__item-back unbutton"><span>Back</span></button>
         <div class="preview__item-imgwrap">
@@ -78,7 +79,6 @@
       $event('imgs:loaded');      
       // Initialize grid
       const item = $grid(grid.value)
-  
       // change cursor text status when hovering a grid item
       item.on('mouseEnterItem', itemTitle => window.cursor.DOM.text.innerHTML = itemTitle)
       item.on('mouseLeaveItem', _ => window.cursor.DOM.text.innerHTML = '')
