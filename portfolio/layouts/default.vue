@@ -6,7 +6,15 @@
 
 <script setup>
   const { $listen } = useNuxtApp()
-
+  const route = useRoute()
+  useHead({
+    link: [
+      {
+        rel: 'canonical',
+        href: `https://savvoff.github.io${route.path}`,
+      },
+    ],
+  })
   $listen('imgs:loaded', () => {
     // Remove loader (loading class)
     document.body.classList.remove('loading')
