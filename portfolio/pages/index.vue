@@ -34,7 +34,7 @@
               {{ lib }}
             </span>
           </div>    
-          <a class="preview__item-button" :href="project.link" target="_blank">See site</a>
+          <a v-if="project.link" class="preview__item-button" :href="project.link" target="_blank">See site</a>
         </div>
       </div>
     </div>
