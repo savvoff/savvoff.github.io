@@ -8,7 +8,8 @@
       :href="`#preview-${idx+1}`" 
       :data-title="project.title"
       :data-color="projectsColors[idx]">
-        <div class="grid__item-img" :style="`background-color: ${projectsColors[idx]};background-image:url(${project.image});`"></div>
+        <div class="grid__item-img" 
+        :style="`background-color: ${projectsColors[idx]};background-image:url(${project.image});`"></div>
       </a>
     </div>
     <div class="preview">
@@ -18,7 +19,8 @@
       class="preview__item">
         <button class="preview__item-back unbutton"><span>Back</span></button>
         <div class="preview__item-imgwrap">
-          <div class="preview__item-img" :style="`background-color: ${projectsColors[idx]};`"></div>
+          <div class="preview__item-img" 
+          :style="`background-color: ${projectsColors[idx]};background-image:url(https://picsum.photos/1400/1800?random=${idx});`"></div>
         </div>
         <h2 data-splitting class="preview__item-title">{{ project.title }}</h2>
         <div class="preview__item-content">

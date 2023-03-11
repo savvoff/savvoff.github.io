@@ -7,6 +7,13 @@ export default defineNuxtConfig({
       title: 'Savvoff\'s Portfolio',
       meta: [
         {
+          charset: 'utf-8'
+        },
+        {
+          name: 'theme-color',
+          content: '#000'
+        },     
+        {
           name: 'viewport',
           content: 'width=device-width, initial-scale=1.0, shrink-to-fit=no'
         },
@@ -15,15 +22,21 @@ export default defineNuxtConfig({
           content: 'Ihor Savvov'
         },
         {
-          charset: 'utf-8'
+          hid: 'description',
+          name: 'description',
+          content: 'Ihor Savvov\'s portfolio showcases; ukrainian fullstack developer with focus on creative development'
+        },
+      ],
+      link: [
+        // { 
+        //   rel: 'stylesheet', 
+        //   href: 'https://use.typekit.net/gyf5muf.css' // tenon font-family
+        // },
+        { 
+          rel: 'apple-touch-icon', 
+          href: '/apple-touch-icon.png' // tenon font-family
         }
       ],
-      // link: [
-      //   { 
-      //     rel: 'stylesheet', 
-      //     href: 'https://use.typekit.net/gyf5muf.css' // tenon font-family
-      //   }
-      // ],
       style: [],
       script: [
         {
@@ -41,6 +54,9 @@ export default defineNuxtConfig({
         }
       ],
       noscript: [],
+      htmlAttrs: {
+        lang: 'en'
+      },
       bodyAttrs: {
         class: ['loading']
       }      

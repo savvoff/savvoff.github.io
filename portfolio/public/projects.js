@@ -36,7 +36,7 @@ export const projects = [
     image: '/img/askatsea.png',
     date: '08/10/2022',
     link: 'https://askatsea.com/',
-    stack: ['Vue.js', 'Strapi', 'GraphQL', 'MongoDB'],
+    stack: ['Nuxt.js', 'Strapi', 'GraphQL', 'MongoDB'],
     starred: true
   },
   {
