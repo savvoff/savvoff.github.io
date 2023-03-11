@@ -11,7 +11,7 @@
     link: [
       {
         rel: 'canonical',
-        href: `https://savvoff.github.io${route.path}`,
+        href: `https://savvoff.space${route.path}`,
       },
     ],
   })

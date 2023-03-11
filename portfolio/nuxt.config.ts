@@ -40,6 +40,11 @@ export default defineNuxtConfig({
       style: [],
       script: [
         {
+          id: 'help-ukraine-win',
+          async: true, 
+          src: 'https://helpukrainewinwidget.org/cdn/widget.js?type=three&position=bottom-right&layout=collapsed'
+        },
+        {
           innerHTML: `
           document.documentElement.className="js";
           var supportsCssVars=function(){
