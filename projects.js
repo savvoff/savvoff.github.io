@@ -90,12 +90,12 @@ export const projects = [
     starred: null
   },
   {
-    title: 'Implastation',
-    category: 'Corporate site',
-    desc: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga, quisquam ab! Tempora, magnam aliquam?',
+    title: 'Verticite',
+    category: 'Design & Architecture',
+    desc: 'V|A is an architectural practice in Geneva, which emerged from Knight Frank Switzerland in 2020.',
     image: 'https://loremflickr.com/1360/1880/cat/all',
-    date: '18/08/2020',
-    link: 'https://en.implastation.com/',
+    date: '20/02/2023',
+    link: 'https://verticite.ch/',
     stack: ['Wordpress', 'Gulp 4', 'Bootstrap 4'],
     starred: null
   },
