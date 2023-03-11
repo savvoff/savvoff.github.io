@@ -1,1 +1,0 @@
-import{f as t,o as a,b as o,q as n}from"./entry.e3e81a33.js";const l={class:"wrapper"},d={__name:"default",setup(_){const{$listen:e}=t();return e("imgs:loaded",()=>{document.body.classList.remove("loading")}),(s,r)=>(a(),o("main",l,[n(s.$slots,"default")]))}};export{d as default};
