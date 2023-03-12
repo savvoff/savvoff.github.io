@@ -367,7 +367,7 @@ a:focus {
         padding: 0.3rem 1rem;
         margin: 0 0.3rem 0.3rem 0;
         color: var(--color-text);
-        background-color: var(--span-color, --color-link);
+        background-color: var(--span-color, var(--color-link));
       }
     }
     
@@ -386,7 +386,7 @@ a:focus {
       margin-bottom: 1rem;
       &:hover, &:focus, &:active {
         outline: none;
-        background: var(--span-color, --color-link);
+        background: var(--span-color, var(--color-link));
       }
     }
 
@@ -427,7 +427,7 @@ a:focus {
     height: 100%;
     width: 80vw;
     grid-template-columns: 47% 53%;
-    grid-template-rows: minmax(max(5rem, 10vh), 0) auto auto 1fr;
+    grid-template-rows: minmax(max(5rem, 10vh), 1fr) auto auto 1fr;
     grid-template-areas:
       '... ...'
       'preview-back ...'

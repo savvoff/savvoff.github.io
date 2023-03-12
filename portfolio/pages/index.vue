@@ -75,7 +75,7 @@
   }) 
 
   onMounted(() => {
-    imagesLoaded('.grid .grid__item-img', { background: true }, () => {
+    imagesLoaded('.preview .preview__item-img', { background: true }, () => {
       $event('imgs:loaded');      
       // Initialize grid
       const item = $grid(grid.value)
