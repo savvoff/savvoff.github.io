@@ -427,7 +427,7 @@ a:focus {
     height: 100%;
     width: 80vw;
     grid-template-columns: 47% 53%;
-    grid-template-rows: minmax(max(5rem, 10vh), 1fr) auto auto 1fr;
+    grid-template-rows: minmax(max(5rem, 10vh), 20%) auto auto 1fr;
     grid-template-areas:
       '... ...'
       'preview-back ...'
