@@ -2,12 +2,16 @@ import gsap from 'gsap';
 import { lerp, getMousePos, calcWinsize, getTranslateValues } from './utils';
 
 // Calculate the viewport size
-let winsize = calcWinsize();
-window.addEventListener('resize', () => winsize = calcWinsize());
+let winsize = typeof window !== 'undefined' ? calcWinsize() : { width: 1920, height: 1080 };
+if (typeof window !== 'undefined') {
+  window.addEventListener('resize', () => winsize = calcWinsize());
+}
 
 // Track the mouse position
 let mousepos = { x: 0, y: 0 };
-window.addEventListener('mousemove', ev => mousepos = getMousePos(ev));
+if (typeof window !== 'undefined') {
+  window.addEventListener('mousemove', ev => mousepos = getMousePos(ev));
+}
 
 export class MagneticFx {
   constructor(el) {
@@ -23,31 +27,58 @@ export class MagneticFx {
     // init events
     this.initEvents();
   }
+  /**
+   * Calculates size and position of element accounting for active translations
+   */
   calculateSizePosition() {
-    // current scroll
+    if (typeof window === 'undefined') {
+      return;
+    }
+    // Current scroll
     this.scrollVal = { x: window.scrollX, y: window.scrollY };
-    // size/position
-    this.rect = this.DOM.el.getBoundingClientRect();
+    // Get current translated values on the element
+    const { x, y } = getTranslateValues(this.DOM.el);
+    // Get bounding rect
+    const currentBoundingRect = this.DOM.el.getBoundingClientRect();
+    // Compute untranslated rect
+    this.rect = {
+      left: currentBoundingRect.left - (parseFloat(x) || 0),
+      top: currentBoundingRect.top - (parseFloat(y) || 0),
+      width: currentBoundingRect.width,
+      height: currentBoundingRect.height,
+    };
   }
+
+  /**
+   * Initializes event listeners
+   */
   initEvents() {
-    window.addEventListener('resize', () => this.calculateSizePosition());
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', () => {
+        this.calculateSizePosition();
+      });
+    }
 
     this.DOM.el.addEventListener('mouseenter', () => {
+      this.calculateSizePosition();
       this.hoverTimeout = setTimeout(() => {
-        // set to last translated values after hovering out
+        // Set to last translated values after hovering out
         const { x, y } = getTranslateValues(this.DOM.el);
-        this.renderedStyles['tx'].previous = x;
-        this.renderedStyles['ty'].previous = y;
-        // start the render loop animation (rAF)
+        this.renderedStyles['tx'].previous = parseFloat(x) || 0;
+        this.renderedStyles['ty'].previous = parseFloat(y) || 0;
+        // Start the render loop animation (rAF)
         this.loopRender();
       }, 10);
     });
+
     this.DOM.el.addEventListener('mouseleave', () => {
       if (this.hoverTimeout) {
         clearTimeout(this.hoverTimeout);
       }
-      // stop the render loop animation (rAF)
+      // Stop the render loop animation (rAF)
       this.stopRendering();
+      this.renderedStyles['tx'].current = 0;
+      this.renderedStyles['ty'].current = 0;
     });
   }
   // start the render loop animation (rAF)

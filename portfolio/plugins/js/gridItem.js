@@ -132,4 +132,39 @@ export class GridItem {
 
     this.loopTransformAnimation();
   }
+
+  /**
+   * Resets grid item state, bounds, and animations
+   */
+  reset() {
+    this.translationVals = { x: 0, y: 0 };
+    this.rotationVals = { x: 0, y: 0 };
+
+    if (this.hoverTimeout) {
+      clearTimeout(this.hoverTimeout);
+    }
+    if (this.timelineHoverIn) {
+      this.timelineHoverIn.kill();
+    }
+    if (this.timelineHoverOut) {
+      this.timelineHoverOut.kill();
+    }
+
+    gsap.set(this.DOM.image, {
+      x: 0,
+      y: 0,
+      scale: 1,
+    });
+
+    if (this.magneticFx) {
+      this.magneticFx.stopRendering();
+      this.magneticFx.renderedStyles.tx.previous = 0;
+      this.magneticFx.renderedStyles.tx.current = 0;
+      this.magneticFx.renderedStyles.ty.previous = 0;
+      this.magneticFx.renderedStyles.ty.current = 0;
+      this.magneticFx.calculateSizePosition();
+    }
+
+    this.layout();
+  }
 }

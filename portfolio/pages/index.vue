@@ -2,26 +2,38 @@
   <div class="content">
     <bg-title />
     <div class="grid" ref="grid">
-      <a v-for="project, idx in projects" 
-      :key="idx" 
-      :class="`grid__item pos-${idx+1}`" 
-      :href="`#preview-${idx+1}`" 
-      :data-title="project.title"
-      :data-color="projectsColors[idx]">
-        <div class="grid__item-img" 
-        :style="`background-color: ${projectsColors[idx]};background-image:url(${project.image});`"></div>
+      <a
+        v-for="(project, idx) in projects"
+        :key="idx"
+        class="grid__item"
+        :href="`#preview-${idx + 1}`"
+        :data-title="project.title"
+        :data-color="projectsColors[idx]"
+        :style="{
+          '--grid-row': gridPositions[idx]?.row || 1,
+          '--grid-column': gridPositions[idx]?.col || 1
+        }"
+      >
+        <div
+          class="grid__item-img"
+          :style="`background-color: ${projectsColors[idx]}; background-image: url(${project.image});`"
+        ></div>
       </a>
     </div>
     <div class="preview">
-      <div v-for="project, idx in projects" 
-      :key="idx" 
-      :id="`preview-${idx+1}`"
-      :style="{'--span-color': projectsColors[idx]}"
-      class="preview__item">
+      <div
+        v-for="(project, idx) in projects"
+        :key="idx"
+        :id="`preview-${idx + 1}`"
+        :style="{ '--span-color': projectsColors[idx] }"
+        class="preview__item"
+      >
         <button class="preview__item-back unbutton"><span>Back</span></button>
         <div class="preview__item-imgwrap">
-          <div class="preview__item-img" 
-          :style="`background-color: ${projectsColors[idx]};background-image:url(https://picsum.photos/1400/1800?random=${idx});`"></div>
+          <div
+            class="preview__item-img"
+            :style="`background-color: ${projectsColors[idx]}; background-image: url(${project.image});`"
+          ></div>
         </div>
         <h2 data-splitting class="preview__item-title">{{ project.title }}</h2>
         <div class="preview__item-content">
@@ -30,14 +42,14 @@
             <span>{{ project.date }}</span>
           </div>
           <p class="preview__item-description">
-           {{ project.desc }}
-          </p>      
+            {{ project.desc }}
+          </p>
           <div class="preview__item-info">
             <p class="preview__item-meta">Used technologies:</p>
-            <span v-for="lib, id in project.stack" :key="id">
+            <span v-for="(lib, id) in project.stack" :key="id">
               {{ lib }}
             </span>
-          </div>    
+          </div>
           <a v-if="project.link" class="preview__item-button" :href="project.link" target="_blank">See site</a>
         </div>
       </div>
@@ -45,59 +57,112 @@
   </div>
 </template>
 
-<script setup>  
+<script setup>
   import imagesLoaded from 'imagesloaded'
+
   import BgTitle from '~/components/BgTitle.vue'
 
   const { $grid, $event } = useNuxtApp()
   const { public: { projects } } = useRuntimeConfig()
-  const grid = ref(null);  
+  const grid = ref(null)
 
   const colors = [
-   '#684ee3',
-   '#c0ec59',
-   '#0053d4',
-   '#2187f1',
-   '#54c4db',
-   '#9a4fd8',
-   '#f4c466'
+    '#684ee3',
+    '#c0ec59',
+    '#0053d4',
+    '#2187f1',
+    '#54c4db',
+    '#9a4fd8',
+    '#f4c466'
   ]
 
-  const projectsColors = computed(() => {
-    let colorsArr = [], i = 0
-    if (projects.length > colors.length) {
-      do {
-        colorsArr.push(...colors)
-        i++
-      } while (i < Math.ceil(projects.length/colors.length))
+  /**
+   * Generates dynamic staggered chessboard positions based on total item count
+   * @param {number} totalItemsCount - Total number of projects
+   * @returns {Array<{ row: number, col: number }>}
+   */
+  function calculateChessboardPositions(totalItemsCount) {
+    const slotPresets = {
+      4: [
+        { row: 5, col: 10 }, { row: 5, col: 34 },
+        { row: 28, col: 8 }, { row: 28, col: 36 }
+      ],
+      5: [
+        { row: 4, col: 8 }, { row: 4, col: 36 },
+        { row: 18, col: 22 },
+        { row: 32, col: 8 }, { row: 32, col: 36 }
+      ],
+      6: [
+        { row: 4, col: 8 }, { row: 4, col: 36 },
+        { row: 18, col: 14 }, { row: 18, col: 30 },
+        { row: 32, col: 8 }, { row: 32, col: 36 }
+      ],
+      7: [
+        { row: 4, col: 5 }, { row: 4, col: 23 }, { row: 4, col: 41 },
+        { row: 18, col: 14 }, { row: 18, col: 32 },
+        { row: 32, col: 10 }, { row: 32, col: 30 }
+      ],
+      8: [
+        { row: 4, col: 5 }, { row: 4, col: 23 }, { row: 4, col: 41 },
+        { row: 18, col: 14 }, { row: 18, col: 32 },
+        { row: 32, col: 5 }, { row: 32, col: 23 }, { row: 32, col: 41 }
+      ]
     }
-    return colorsArr
-  }) 
+
+    if (slotPresets[totalItemsCount]) {
+      return slotPresets[totalItemsCount]
+    }
+
+    const positions = []
+    const rowTracks = [4, 18, 32]
+    const columnsPerRow = [
+      [5, 23, 41],
+      [14, 32],
+      [8, 26, 44]
+    ]
+    let itemIndex = 0
+    let cycleIndex = 0
+
+    while (itemIndex < totalItemsCount) {
+      for (let rowIndex = 0; rowIndex < rowTracks.length && itemIndex < totalItemsCount; rowIndex++) {
+        const availableColumns = columnsPerRow[rowIndex]
+        const columnCoordinate = availableColumns[cycleIndex % availableColumns.length]
+        positions.push({ row: rowTracks[rowIndex], col: columnCoordinate })
+        itemIndex++
+      }
+      cycleIndex++
+    }
+
+    return positions
+  }
+
+  const gridPositions = computed(() => {
+    return calculateChessboardPositions(projects.length)
+  })
+
+  const projectsColors = computed(() => {
+    const colorsArray = []
+    let iteration = 0
+    const totalIterations = Math.max(1, Math.ceil(projects.length / colors.length))
+    while (iteration < totalIterations) {
+      colorsArray.push(...colors)
+      iteration++
+    }
+    return colorsArray
+  })
 
   onMounted(() => {
     imagesLoaded('.preview .preview__item-img', { background: true }, () => {
-      $event('imgs:loaded');      
+      $event('imgs:loaded')
       // Initialize grid
       const item = $grid(grid.value)
-      // change cursor text status when hovering a grid item
+      // Change cursor text status when hovering a grid item
       item.on('mouseEnterItem', itemTitle => window.cursor.DOM.text.innerHTML = itemTitle)
       item.on('mouseLeaveItem', _ => window.cursor.DOM.text.innerHTML = '')
-      window.cursor.renderedStyles['scaleTrail'].current = 1;
-    });
+      window.cursor.renderedStyles['scaleTrail'].current = 1
+    })
   })
+
   const exposed = { projects }
   defineExpose(exposed)
 </script>
-
-<!-- <script>
- export default {
-  setup() {
-    const config = useRuntimeConfig()
-    const projects = config.public.projects
-  
-    return {
-      projects
-    }
-  }
- } 
-</script> -->

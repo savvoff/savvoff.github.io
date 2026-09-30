@@ -181,8 +181,12 @@ export class Grid extends EventEmitter {
       .timeline({
         onComplete: () => {
           item.preview.DOM.el.classList.remove('preview__item--open');
-          // pointer events
+          // Pointer events
           this.DOM.el.classList.remove('grid--inactive');
+          for (const gridItem of this.gridItems) {
+            gridItem.reset();
+            gridItem.loopTransformAnimation();
+          }
         }
       })
       .addLabel('start', 0)

@@ -1,3 +1,7 @@
+@use "sass:color";
+
+$base-value: 18px !default;
+
 // Colors
 $black: #000 !default;
 $white: #fff !default;
@@ -11,7 +15,7 @@ $gold: #f4c466 !default;
 
 body {
   --color-text: #{$white};
-  --color-text-alt: #{darken($white, 15%)};
+  --color-text-alt: #{color.adjust($white, $lightness: -15%)};
   --color-title: #{$black};
   --color-bg: #{$black};
   --color-link: #{$gold};
